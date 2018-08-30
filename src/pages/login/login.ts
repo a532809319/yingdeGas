@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 // import { HttpClient, HttpParams } from '@angular/common/http';
 import {BluetoothSerial} from "@ionic-native/bluetooth-serial";
 import {HttpSerProvider} from "../../providers/http-service/http-service";
+import {MyTestPage} from "../my-test/my-test";
+import {MyTestPageNewPage} from "../my-test-page-new/my-test-page-new";
 
 @Component({
   selector: 'page-login',
@@ -35,7 +37,7 @@ export class LoginPage {
   }
   login(){
     var that=this;
-
+   this.navCtrl.push(MyTestPageNewPage);
     this.req.postLogin('login',{userCode:'A0001',password:'123456'},function (ok) {
       // alert("ok")
       let data=ok.data

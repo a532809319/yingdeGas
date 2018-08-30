@@ -23,6 +23,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {PrinterProvider} from "../providers/printer/printer";
 import {HomePage} from "../pages/home/home";
 import {HttpSerProvider} from "../providers/http-service/http-service";
+import {MyTestPage} from "../pages/my-test/my-test";
+import {MyTestPageNewPage} from "../pages/my-test-page-new/my-test-page-new";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import {HttpSerProvider} from "../providers/http-service/http-service";
     MileLengthPage,
     DetailePage,
     PringPagePage,
-    HomePage
+    HomePage,
+    MyTestPage,
+    MyTestPageNewPage,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,9 @@ import {HttpSerProvider} from "../providers/http-service/http-service";
     MileLengthPage,
     DetailePage,
     PringPagePage,
-    HomePage
+    HomePage,
+    MyTestPage,
+    MyTestPageNewPage,
   ],
   providers: [
     StatusBar,
