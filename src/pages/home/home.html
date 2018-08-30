@@ -1,14 +1,22 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Ionic Blank
+      Bluetooth printer sample
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" floating>Title</ion-label>
+      <ion-input [(ngModel)]='inputData.title'></ion-input> 
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Text</ion-label>
+      <ion-input [(ngModel)]='inputData.text'></ion-input> 
+    </ion-item>
+    <div hidden></div>
+  </ion-list>
+  <button ion-button full (click)="prepareToPrint(inputData)">Test print</button>
 </ion-content>

@@ -3,6 +3,10 @@
   "integrations": {
     "cordova": {}
   },
+  "proxies": [{
+    "path": "/api",
+    "proxyUrl": "http://localhost:8001/api"
+  }],
   "type": "ionic-angular",
   "pro_id": "ed5707a4"
 }
