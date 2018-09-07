@@ -1,0 +1,53 @@
+<!--
+  Generated template for the NewtaskdetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card-content  *ngFor="let item of dashabi">
+    <p>
+      调度号：{{item.vbilcode}}<br>
+      提货工厂：{{item.factoryname}}<br>
+      液体介质：{{item.materialname}}<br>
+      计划充装数量：{{item.nastnum}}<br>
+      车辆：{{item.vvehiclename}}<br>
+      车挂：{{item.carhanger}}<br>
+      发车时间：<br>
+      主驾驶：{{item.masterdriver}}<br>
+      副驾驶：<br>
+      调度人员：{{item.username}}<br>
+      电话号码{{item.mobile}}<br></p>
+    <p>
+      客户：<br>
+      客户要求货量：<br>
+      送货地址：<br>
+      配送时间：<br>
+      要求送达时间：<br>
+      备注：<br></p><p>
+      客户：<br>
+      客户要求货量：<br>
+      送货地址：<br>
+      配送时间：<br>
+      要求送达时间：<br>
+      备注：<br><br><p>
+      客户：<br>
+      客户要求货量：<br>
+      送货地址：<br>
+      配送时间：<br>
+      要求送达时间：<br>
+      备注：<br>
+  </p>
+  </ion-card-content>
+
+</ion-content>

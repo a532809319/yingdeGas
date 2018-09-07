@@ -777,7 +777,7 @@ export class ScheduilingPlanPage {
 
   }
   checkboxOnclick(name){
-  let input =document.getElementById(name).checked
+  let input =document.getElementById(name).checked;
 
     console.log(input,"aaa");
  // console.log(this.check)
