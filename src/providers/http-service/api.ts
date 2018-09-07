@@ -40,4 +40,5 @@ export class HttpApi {
       // that.req.closeLoadView();
     })
   }
+
 }

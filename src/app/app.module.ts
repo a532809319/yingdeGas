@@ -25,6 +25,10 @@ import {HomePage} from "../pages/home/home";
 import {HttpSerProvider} from "../providers/http-service/http-service";
 import {MyTestPage} from "../pages/my-test/my-test";
 import {MyTestPageNewPage} from "../pages/my-test-page-new/my-test-page-new";
+import {ScheduilingPlanPage} from "../pages/scheduiling-plan/scheduiling-plan";
+import {NewtaskdetailPage} from "../pages/newtaskdetail/newtaskdetail";
+import {PersondetailPage} from "../pages/persondetail/persondetail";
+import {PoundlistPage} from "../pages/poundlist/poundlist";
 
 @NgModule({
   declarations: [
@@ -43,8 +47,10 @@ import {MyTestPageNewPage} from "../pages/my-test-page-new/my-test-page-new";
     DetailePage,
     PringPagePage,
     HomePage,
-    MyTestPage,
-    MyTestPageNewPage,
+    PersondetailPage,
+    NewtaskdetailPage,
+    ScheduilingPlanPage,
+    PoundlistPage,
   ],
   imports: [
     BrowserModule,
@@ -68,8 +74,10 @@ import {MyTestPageNewPage} from "../pages/my-test-page-new/my-test-page-new";
     DetailePage,
     PringPagePage,
     HomePage,
-    MyTestPage,
-    MyTestPageNewPage,
+    PersondetailPage,
+    NewtaskdetailPage,
+    ScheduilingPlanPage,
+    PoundlistPage,
   ],
   providers: [
     StatusBar,

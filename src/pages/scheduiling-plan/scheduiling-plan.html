@@ -4,19 +4,159 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header xmlns:position="http://www.w3.org/1999/xhtml" xmlns:position="http://www.w3.org/1999/xhtml"
+            xmlns:position="http://www.w3.org/1999/xhtml" xmlns:position="http://www.w3.org/1999/xhtml">
+  <!--<button ion-button icon-start>-->
+  <!--<ion-col><ion-icon name="contact" ></ion-icon></ion-col>-->
+  <!--</button>-->
+  <div>
+    <ion-navbar no-border-bottom>
+      <ion-title></ion-title>
+    </ion-navbar>
+    <button ion-button click="per()"color="dark"  clear icon-only style="position:absolute;right:1%;top:5%" >
+      <ion-icon name='contact' is-active="true" ></ion-icon>
+    </button>
+    <ion-toolbar no-border-top>
 
-  <ion-navbar>
-    <ion-title>调度计划单</ion-title>
-  </ion-navbar>
+      <ion-segment [(ngModel)]="task">
+        <ion-segment-button value="new">
+          新任务
+        </ion-segment-button>
+        <ion-segment-button value="todo">
+          待完成
+        </ion-segment-button>
+
+      </ion-segment>
+    </ion-toolbar>
+  </div>
+  <div>
+
+  </div>
+
 
 </ion-header>
 
 
 <ion-content padding>
-<div>新任务|待完成</div>
-  <>
 
 
+  <!--<div>a</div>
+<div>
+  {{ day | date:'yyMMdd'}}
+</div>
+  <div>{{b}}&#45;&#45;&#45;&#45;</div>
+  <div   *ngIf="b">小时 </div>
+<div *ngFor="let item of arr"  >
+   <div>====={{item.a}}</div>
+   <div>=====xxxxx{{item.b}}</div>
+</div>
+-->
+  <div [ngSwitch]="task">
+    <ion-list *ngSwitchCase="'new'">
+
+      <ion-item  *ngFor="let item of data">
+
+          <div >
+
+
+              <button  (click)="detail()">
+                发货工厂：{{ item.factoryname}}
+              </button>
+
+            <p>发车时间：  <input id={{item.vbillcode}} type="checkbox" (click)="checkboxOnclick(item.vbillcode)"   style=float:right />
+
+
+            </p>
+            <p>主驾驶：{{item.masterdriver}} 副驾驶：
+            </p>
+              <!--<ion-checkbox color="dark" checked="true"></ion-checkbox>-->
+
+              <div>
+
+             </div>
+
+
+            <p>调度号：{{item.vbillcode}} 车号：{{item.carhanger}}</p>
+            <table border="1">
+            <tr>
+              <th>客户</th>
+              <th>货量</th>
+              <th>地址</th>
+              <th> 预计送货时间</th>
+            </tr>
+            <tr>
+              <td>{{item.custemername}}</td>
+              <td>{{item.nastnum}}</td>
+              <td></td>
+              <td>{{item.vdef16}}</td>
+            </tr>
+            </table>
+          </div>
+
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div [ngSwitch]="task">
+    <ion-list *ngSwitchCase="'todo'">
+      <ion-item  *ngFor="let item of data">
+
+        <div >
+
+
+          <button  (click)="detail()">
+            发货工厂：{{ item.factoryname}}
+          </button>
+
+          <p>发车时间：  <input id={{item.vbillcode}} type="checkbox" (click)="checkboxOnclick(item.vbillcode)"   style=float:right />
+
+
+          </p>
+          <p>主驾驶：{{item.masterdriver}} 副驾驶：
+          </p>
+
+
+          <div>
+
+          </div>
+           <p>调度号：{{item.vbillcode}} 车号：{{item.carhanger}}</p>
+          <table border="1">
+            <tr>
+              <th>客户</th>
+              <th>货量</th>
+              <th>地址</th>
+              <th> 预计送货时间</th>
+            </tr>
+            <tr>
+              <td>{{item.custemername}}</td>
+              <td>{{item.nastnum}}</td>
+              <td></td>
+              <td>{{item.vdef16}}</td>
+            </tr>
+          </table>
+          <button ion-button icon-start clear>
+            到达客户
+          </button>
+          <button ion-button icon-start clear>
+            开始详情
+          </button>
+          <!-- Float the icon right -->
+          <button ion-button icon-start clear (click)="gopoundlist()" >
+            结束卸货
+
+          </button>
+
+          <!-- Float the icon right -->
+          <button ion-button icon-end clear>
+            签收
+          </button>
+
+        </div>
+
+      </ion-item>
+    </ion-list>
+  </div>
+
+    <button ion-button (click)="showConfirm" style="position:fixed;left:38%;top: 90%;">接受任务</button>
 
 </ion-content>
