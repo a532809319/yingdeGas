@@ -62,6 +62,26 @@ export class HttpSerProvider {
       }
     });
   }
+  public postQuery(url: string, body: any,params:any , successCallback, errorCallback): any {
+    // 此处使用的post模式为非严格模式，如果要使用严格模式，请把参数放在第二个位置 覆盖null
+    // 正式发布不能使用代理，此处要做个处理
+    url = this.urlApi+url;
+    return this.http.post(url,body, {
+      headers: this.getHeaders(),
+      params: params// 添加token信息
+    }).subscribe((res: any) => {
+      console.log(res,"res")
+      this.responseSuccess(res, function (msg) {
+        if (successCallback) {
+          successCallback(res, msg);
+        }
+      });
+    }, err => {
+      if (errorCallback) {
+        errorCallback(err);
+      }
+    });
+  }
 
   /**
    * 处理正式发布环境导致的路径问题，请求出错

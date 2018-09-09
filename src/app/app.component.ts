@@ -17,7 +17,7 @@ import {ScheduilingPlanPage} from "../pages/scheduiling-plan/scheduiling-plan";
 })
 export class MyApp {
 
-  rootPage:any = ScheduilingPlanPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

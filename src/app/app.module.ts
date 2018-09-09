@@ -29,6 +29,8 @@ import {ScheduilingPlanPage} from "../pages/scheduiling-plan/scheduiling-plan";
 import {NewtaskdetailPage} from "../pages/newtaskdetail/newtaskdetail";
 import {PersondetailPage} from "../pages/persondetail/persondetail";
 import {PoundlistPage} from "../pages/poundlist/poundlist";
+import {FillWeightPage} from "../pages/fill-weight/fill-weight";
+import {ImagePicker} from "@ionic-native/image-picker";
 
 @NgModule({
   declarations: [
@@ -51,11 +53,17 @@ import {PoundlistPage} from "../pages/poundlist/poundlist";
     NewtaskdetailPage,
     ScheduilingPlanPage,
     PoundlistPage,
+    FillWeightPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+
+    IonicModule.forRoot(MyApp
+      ,{
+        backButtonText:"返回",
+
+      })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,6 +86,7 @@ import {PoundlistPage} from "../pages/poundlist/poundlist";
     NewtaskdetailPage,
     ScheduilingPlanPage,
     PoundlistPage,
+    FillWeightPage,
   ],
   providers: [
     StatusBar,
@@ -85,7 +94,8 @@ import {PoundlistPage} from "../pages/poundlist/poundlist";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BluetoothSerial,
     PrinterProvider,
-    HttpSerProvider
+    HttpSerProvider,
+    ImagePicker
   ]
 })
 export class AppModule {}
