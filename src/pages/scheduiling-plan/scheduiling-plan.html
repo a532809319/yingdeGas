@@ -102,10 +102,10 @@
       <div radio-group (ngModelChange)='Changed($event)' [(ngModel)]="autoManufacturers">
 
         <div *ngFor="let item of content" >
-          <div  *ngIf="item.vdef17!=null">
+          <div  *ngIf="item.vdef17!=null&&item.over==false">
 
-            <ion-icon (click)="complite(item.cdeliveryid,item)" name="ios-arrow-dropright-outline"
-                      style="float: right;font-size: 30px" large></ion-icon>
+            <!--<ion-icon (click)="complite(item.cdeliveryid,item)" name="ios-arrow-dropright-outline"-->
+                      <!--style="float: right;font-size: 30px" large></ion-icon>-->
 
 
             <!--<div>-->
@@ -142,14 +142,23 @@
               <ion-col><span (click)="outCompany(item.vdef17,item)"
                             ><button ion-button round  class="fbtn" [ngStyle]="{'background':item.vdef17  =='3'? 'green' : '#ccc' }">出厂</button></span></ion-col>
             </ion-row>
-            <div style="overflow-x:scroll;overflow-y:auto;width:100%;margin-top: 10px ; position: relative;">
-              <table width="auto" style="white-space:nowrap; position: relative" >
+
+            <div style="overflow:auto;width:100%;margin-top: 10px ;">
+
+              <table width="auto" style="white-space:nowrap;" >
+
                 <tr class="table-head-1" style="background: #009FE8;width: 100%;color: white" >
                   <th width="5%" *ngIf="item.vdef17  == '4'?true:false"> 选择</th>
 
                   <th   width="25%" >客户</th>
                   <th  width="35%">货量</th>
                   <th  width="35%">地址</th>
+                  <!--<th  width="35%">地址</th>-->
+                  <!--<th  width="35%">地址</th>-->
+                  <!--<th  width="35%">地址</th>-->
+                  <!--<th  width="35%">地址</th>-->
+                  <!--<th  width="35%">地址</th>-->
+                  <!--<th  width="35%">地址</th>-->
                 </tr>
 
                 <tr style="text-align: center" *ngFor="let detail of item.deliveryDetailDtos">
@@ -173,29 +182,6 @@
                   <td>{{detail.detailinfo||''}}</td>
 
                   <!--<td >{{detail.vbdef16||''}}</td>-->
-                  <div *ngIf="item.vdef17=='4'&&detail.cdeliverybid==bid"
-                       style="position: absolute;bottom: -40px;left:0px;height: 40px;">
-                    <!--{{detail.customername}}-->
-                    <button class="fbtn" ion-button round (click)="cometocus(item.cdeliveryid,item,detail)" *ngIf="detail.cdeliverybid==bid"
-                          [ngStyle]="{'background':detail.vbdef15  == '~'&&item.vdef17=='4' ? 'green' : '#ccc' }"
-
-                    >到达客户</button>
-                    <button class="fbtn" ion-button round *ngIf="detail.cdeliverybid==bid" (click)="comestart(item.cdeliveryid,item,detail)"
-                          [ngStyle]="{'background':detail.vbdef15  == '0'&&item.vdef17=='4'? 'green' : '#ccc' }"
-
-                    >开始卸货</button>
-                    <button class="fbtn" ion-button round
-                      (click)="comeent(item.cdeliveryid,item,detail)"
-                      [ngStyle]="{'background':detail.vbdef15 == '1' &&item.vdef17=='4'? 'green' : '#ccc' }">
-                          结速卸货</button>
-
-                    <button class="fbtn"  ion-button  round  *ngIf="detail.cdeliverybid==bid"
-                          (click)="overgame(detail.cdeliveryid,item,detail)"
-                          [ngStyle]="{'background':detail.vbdef15  =='2'&&item.vdef17=='4'? 'green' : '#ccc' }">
-                          签收
-                        </button>
-
-                  </div>
 
 
                 </tr>
@@ -205,6 +191,45 @@
 
             </div>
             <div style="height: 20px;width: 100%"></div>
+            <div *ngIf="item.vdef17=='4'&&detaiok&&detaiok.cdeliveryid==item.cdeliveryid"
+            >
+
+              <ion-row>
+                <ion-col>
+                  <button class="fbtn" ion-button round (click)="cometocus(item.cdeliveryid,item,detaiok)"
+                          [ngStyle]="{'background':detaiok.vbdef15  == '~'&&item.vdef17=='4' ? 'green' : '#ccc' }"
+
+                  >到达客户</button>
+
+                </ion-col>
+                <ion-col>
+                  <button class="fbtn" ion-button round *ngIf="detaiok.cdeliverybid==bid" (click)="comestart(item.cdeliveryid,item,detaiok)"
+                          [ngStyle]="{'background':detaiok.vbdef15  == '0'&&item.vdef17=='4'? 'green' : '#ccc' }"
+
+                  >开始卸货</button>
+
+                </ion-col>
+                <ion-col>
+                  <button class="fbtn" ion-button round
+                          (click)="comeent(item.cdeliveryid,item,detaiok)"
+                          [ngStyle]="{'background':detaiok.vbdef15 == '1' &&item.vdef17=='4'? 'green' : '#ccc' }">
+                    结速卸货</button>
+
+                </ion-col>
+                <ion-col>
+                  <button class="fbtn"  ion-button  round
+                          (click)="overgame(detaiok.cdeliveryid,item,detaiok)"
+                          [ngStyle]="{'background':detaiok.vbdef15  =='2'&&item.vdef17=='4'? 'green' : '#ccc' }">
+                    签收
+                  </button>
+
+                </ion-col>
+
+              </ion-row><!--{{detail.customername}}-->
+
+
+            </div>
+
 
           </div>
           <div style="height: 20px;width: 100%"></div>

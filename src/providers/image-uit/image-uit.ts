@@ -145,7 +145,7 @@ export class ImageUitProvider {
           // success
           // alert("ok")
           let prompt2 = that.alertCtrl.create({
-            title: '接受成功',
+            title: '上传成功',
             message: "成功！",
 
             buttons: [

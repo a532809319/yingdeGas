@@ -44,6 +44,7 @@ export class ScheduilingPlanPage {
   todo2: FormGroup;
   autoManufacturers: any;
   bid: any;
+  detaiok: any;
 
 
   constructor(public alertCtrl: AlertController, public req: HttpSerProvider, public navCtrl: NavController
@@ -231,6 +232,11 @@ export class ScheduilingPlanPage {
      })
    }
   }
+  fuck(bid){
+
+
+
+  }
   comeent(cdeliveryid,item,detai){
    if(detai.vbdef15=='1'){
      this.navCtrl.push(FillWeightPage,{title:false,bang:item.defcode,hid:cdeliveryid,bid:this.autoManufacturers})
@@ -246,7 +252,21 @@ export class ScheduilingPlanPage {
   Changed($event){
     // alert(1)
     console.log($event)
-    this.bid=$event;
+    let bid=this.bid=$event;
+    // this.fuck(this.bid)
+    let that=this;
+    // that.content = that.content.filter(item => arr.indexOf(item.cdeliveryid) < 0)
+    let detail=''
+    that.content.forEach(function (item) {
+      item.deliveryDetailDtos.forEach(function (item2) {
+        if( item2.cdeliverybid==bid){
+          detail=item2
+        }
+      })
+    })
+    console.log(detail,"detail")
+    this.detaiok=detail
+
   }
   goto(status, item) {
     let that = this;
