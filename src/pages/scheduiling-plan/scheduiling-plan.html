@@ -18,7 +18,7 @@
     </button>
     <ion-toolbar no-border-top>
 
-      <ion-segment [(ngModel)]="task">
+      <ion-segment [(ngModel)]="task" (ionChange)="sysChanged()">
         <ion-segment-button value="new">
           新任务
         </ion-segment-button>
@@ -43,43 +43,42 @@
   <div [ngSwitch]="task">
 
 
-
-
     <ion-list *ngSwitchCase="'new'">
       <form [formGroup]="todo" (ngSubmit)="logForm()">
 
-     <div  *ngFor="let item of content">
-       <div padding *ngIf="!(item.vdef17==null)">
+        <div *ngFor="let item of content">
+          <div padding *ngIf="(item.vdef17==null)">
 
-       <div>
-         <ion-checkbox  id="1"  formControlName={{item.cdeliveryid}}  checked="false"  style="float: right"></ion-checkbox>
-       </div>
-       <div>
-         提货工厂：{{item.factoryname}}
-       </div>
-       <div>发车时间{{item.vdef18}}</div>
-       <div>主驾驶室{{item.masterdriver}} &nbsp;&nbsp;&nbsp; 副驾驶室{{item.copilot}}</div>
-       <div>调度号{{item.vbillcode}} &nbsp;&nbsp;&nbsp; 车号{{item.vvehiclename}}</div>
-       <table border="1">
-         <tr>
-           <th>客户</th>
-           <th>货量</th>
-           <th>地址</th>
-           <th> 预计送货时间</th>
-         </tr>
-         <tr *ngFor="let detail of item.deliveryDetailDtos" style="text-align: center">
-           <td style="padding: 3px">{{detail.customername}}</td>
-           <td  style="padding: 3px">{{detail.nastnum}}</td>
-           <td>{{detail.detailinfo||''}}</td>
+            <div>
+              <ion-checkbox id="1" formControlName={{item.cdeliveryid}} checked="false"
+                            style="float: right"></ion-checkbox>
+            </div>
+            <div>
+              提货工厂：{{item.factoryname}}
+            </div>
+            <div>发车时间{{item.vdef18}}</div>
+            <div>主驾驶室{{item.masterdriver}} &nbsp;&nbsp;&nbsp; 副驾驶室{{item.copilot}}</div>
+            <div>调度号{{item.vbillcode}} &nbsp;&nbsp;&nbsp; 车号{{item.vvehiclename}}</div>
+            <table border="1">
+              <tr>
+                <th>客户</th>
+                <th>货量</th>
+                <th>地址</th>
+                <th> 预计送货时间</th>
+              </tr>
+              <tr *ngFor="let detail of item.deliveryDetailDtos" style="text-align: center">
+                <td style="padding: 3px">{{detail.customername}}</td>
+                <td style="padding: 3px">{{detail.nastnum}}</td>
+                <td>{{detail.detailinfo||''}}</td>
 
-           <td  style="padding: 3px">{{detail.vbdef16||''}}</td>
+                <td style="padding: 3px">{{detail.vbdef16||''}}</td>
 
-         </tr>
-       </table>
+              </tr>
+            </table>
 
-     </div>
-      </div>
-        <button ion-button type="submit"  style="position:fixed;left:38%;top: 90%;" >接受任务</button>
+          </div>
+        </div>
+        <button ion-button type="submit" style="position:fixed;left:38%;top: 90%;border-radius: 30px;">接受任务</button>
 
       </form>
       <!--<button  (click)="detail()">-->
@@ -123,52 +122,85 @@
 
   <div [ngSwitch]="task">
     <ion-list *ngSwitchCase="'todo'">
-      <form [formGroup]="todo" (ngSubmit)="logForm()">
+      <div radio-group (ngModelChange)='Changed($event)' [(ngModel)]="autoManufacturers">
 
-        <div  *ngFor="let item of content">
-          <div padding *ngIf="item.vdef17!=null" >
+        <div *ngFor="let item of content" padding>
+          <div padding *ngIf="item.vdef17!=null">
 
-              <ion-icon (click)="complite(item.cdeliveryid,item)"  name="ios-arrow-dropright-outline"  style="float: right;font-size: 30px"  large ></ion-icon>
+            <ion-icon (click)="complite(item.cdeliveryid,item)" name="ios-arrow-dropright-outline"
+                      style="float: right;font-size: 30px" large></ion-icon>
             <div>
-              提货工厂：{{item.factoryname}}
+              <span class="title">提货工厂</span>：{{item.factoryname}}
             </div>
             <div>发车时间{{item.vdef18}}</div>
             <div>主驾驶室{{item.masterdriver}} &nbsp;&nbsp;&nbsp; 副驾驶室{{item.copilot}}</div>
             <div>调度号{{item.vbillcode}} &nbsp;&nbsp;&nbsp; 车号{{item.vvehiclename}}</div>
             <ion-row>
-              {{item.vdef17}}
-              <ion-col> <span [ngStyle]="{'color':item.vdef17  == '1' ? 'green' : 'black' }" >进厂</span></ion-col>
-              <ion-col><span [ngStyle]="{'color':item.vdef17  == '2'? 'green' : 'black' }"  (click)="todoStart(item.vdef17,item)" >开始充装</span></ion-col>
-              <ion-col> <span [ngStyle]="{'color':item.vdef17 == '3' ? 'green' : 'black' }" (click)="todoenstart(item.vdef17,item)">结束充装</span></ion-col>
-              <ion-col> <span [ngStyle]="{'color':item.vdef17  =='4'? 'green' : 'black' }" >出厂</span></ion-col>
+              <!--{{item.vdef17}}-->
+              <ion-col><span [ngStyle]="{'color':item.vdef17  == '0' ? 'green' : 'black' }"
+                             (click)="goto(item.vdef17,item)">到厂</span>
+              </ion-col>
+              <ion-col><span [ngStyle]="{'color':item.vdef17  == '1'? 'green' : 'black' }"
+                             (click)="todoStart(item.vdef17,item)">开始充装</span></ion-col>
+              <ion-col><span [ngStyle]="{'color':item.vdef17 == '2' ? 'green' : 'black' }"
+                             (click)="todoenstart(item.vdef17,item)">结束充装</span></ion-col>
+              <ion-col><span (click)="outCompany(item.vdef17,item)"
+                             [ngStyle]="{'color':item.vdef17  =='3'? 'green' : 'black' }">出厂</span></ion-col>
             </ion-row>
-            <table border="1">
+            <table border="1" style="position: relative">
               <tr>
+                <th *ngIf="item.vdef17  == '4'?true:false"> 选择</th>
+
                 <th>客户</th>
                 <th>货量</th>
                 <th>地址</th>
                 <th> 预计送货时间</th>
-                <th  *ngIf="item.vdef17  === '4'?true:false"> 状态</th>
               </tr>
-              <tr *ngFor="let detail of item.deliveryDetailDtos" style="text-align: center">
+
+              <tr *ngFor="let detail of item.deliveryDetailDtos">
+                <td width="30px" *ngIf="item.vdef17  == '4'?true:false">
+                  <!--<ion-row>-->
+                  <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '1' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">进厂</span></ion-col>-->
+                  <!--<ion-col><span [ngStyle]="{'color':item.vbdef15  === '2'? 'green' : 'black' }"  (click)="todoTask(item.vdef17,item)" >开始充装</span></ion-col>-->
+                  <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '3' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">结束充装</span></ion-col>-->
+                  <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '4'? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">出厂</span></ion-col>-->
+                  <!--</ion-row>-->
+                  <div style="background: #ccc;border: 1px;margin: 5px;width: 20px;height: 20px">
+                    <ion-radio style="width: 100%;height: 100%" value={{detail.cdeliverybid}}
+                    ></ion-radio>
+                  </div>
+
+
+                </td>
+
                 <td style="padding: 3px">{{detail.customername}}</td>
-                <td  style="padding: 3px">{{detail.nastnum}}</td>
+                <td style="padding: 3px">{{detail.nastnum}}</td>
                 <td>{{detail.detailinfo||''}}</td>
 
-                <td  style="padding: 3px">{{detail.vbdef16||''}}</td>
+                <td style="padding: 3px">{{detail.vbdef16||''}}</td>
+                <div *ngIf="item.vdef17=='4'&&detail.cdeliverybid==bid"
+                     style="position: absolute;bottom: -60px;left:0px;height: 40px;width: 300px">
+                      <!--{{detail.customername}}-->
 
-                <td width="40%" *ngIf="item.vdef17  === '4'?true:false">
-                    <!--<ion-row>-->
-                      <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '1' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">进厂</span></ion-col>-->
-                      <!--<ion-col><span [ngStyle]="{'color':item.vbdef15  === '2'? 'green' : 'black' }"  (click)="todoTask(item.vdef17,item)" >开始充装</span></ion-col>-->
-                      <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '3' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">结束充装</span></ion-col>-->
-                      <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '4'? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">出厂</span></ion-col>-->
-                    <!--</ion-row>-->
-                  <div [ngStyle]="{'color':item.vbdef15  === '1' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">进厂</div>
-                    <div [ngStyle]="{'color':item.vbdef15  === '2' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">开始充装</div>
-                    <div [ngStyle]="{'color':item.vbdef15  === '3' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">结束充装</div>
-                    <div [ngStyle]="{'color':item.vbdef15  === '4' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">出厂</div>
-                </td>
+                        <span (click)="cometocus(item.cdeliveryid,item,detail)" *ngIf="detail.cdeliverybid==bid"
+                              [ngStyle]="{'color':detail.vbdef15  == '~'&&item.vdef17=='4' ? 'green' : 'black' }"
+
+                        >到达客户</span>
+                        <span *ngIf="detail.cdeliverybid==bid"  (click)="comestart(item.cdeliveryid,item,detail)"
+                              [ngStyle]="{'color':detail.vbdef15  == '0'&&item.vdef17=='4'? 'green' : 'black' }"
+
+                        >开始卸货</span>
+                        <span
+                              (click)="comeent(item.cdeliveryid,item,detail)"
+                              [ngStyle]="{'color':detail.vbdef15 == '1' &&item.vdef17=='4'? 'green' : 'black' }">
+                          结速卸货</span>
+
+                        <span *ngIf="detail.cdeliverybid==bid"
+                              (click)="overgame(detail.cdeliveryid,item,detail)" [ngStyle]="{'color':detail.vbdef15  =='2'&&item.vdef17=='4'? 'green' : 'black' }">
+                          签收
+                        </span>
+
+                </div>
 
 
               </tr>
@@ -177,15 +209,12 @@
             </table>
 
 
-
-
-
-
           </div>
+          <div style="height: 40px;width: 100%"></div>
         </div>
         <!--<button ion-button type="submit"  style="position:fixed;left:38%;top: 90%;" >接受任务</button>-->
 
-      </form>
+      </div>
       <!--<button  (click)="detail()">-->
       <!--发货工厂：{{ item.factoryname}}-->
       <!--</button>-->

@@ -16,7 +16,7 @@ import { MileLengthPage } from '../pages/mile-length/mile-length';
 import { DetailePage } from '../pages/detaile/detaile';
 import { PringPagePage } from '../pages/pring-page/pring-page';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
-
+import { File } from '@ionic-native/file';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {HttpClientModule} from "@angular/common/http";
@@ -31,6 +31,9 @@ import {PersondetailPage} from "../pages/persondetail/persondetail";
 import {PoundlistPage} from "../pages/poundlist/poundlist";
 import {FillWeightPage} from "../pages/fill-weight/fill-weight";
 import {ImagePicker} from "@ionic-native/image-picker";
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { Camera } from '@ionic-native/camera';
+import { ImageUitProvider } from '../providers/image-uit/image-uit';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,12 @@ import {ImagePicker} from "@ionic-native/image-picker";
     BluetoothSerial,
     PrinterProvider,
     HttpSerProvider,
-    ImagePicker
+    ImagePicker,
+    FileTransfer,
+    Camera,
+    File,
+    ImageUitProvider
+
   ]
 })
 export class AppModule {}

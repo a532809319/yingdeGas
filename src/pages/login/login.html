@@ -6,31 +6,33 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page8">
-  <form id="login-form1">
     <div class="spacer" style="height:100px;" id="login-spacer2"></div>
     <h1 id="login-heading1" style="color:#000000;text-align:center;">
       盈德
     </h1>
+  <div>
+  </div>
     <div class="spacer" style="width:300px;height:44px;" id="login-spacer3"></div>
     <ion-list id="login-list4">
       <ion-item id="login-input1">
         <ion-label>
           账号
         </ion-label>
-        <ion-input type="email" placeholder="手机/邮箱"></ion-input>
+        <ion-input type="text"  [(ngModel)]="username" placeholder="手机/邮箱"></ion-input>
+
       </ion-item>
       <ion-item id="login-input2">
         <ion-label>
           密码
         </ion-label>
-        <ion-input type="password" placeholder="密码"></ion-input>
+        <ion-input type="password" [(ngModel)]="password" placeholder="密码"></ion-input>
       </ion-item>
     </ion-list>
     <div class="spacer" style="height:40px;" id="login-spacer1"></div>
     <button id="login-button12" ion-button color="positive" block style="color:#1D2423;" (click)="login()">
       登录
-    </button> <button id="login-button1" ion-button color="positive" block style="color:#1D2423;" (click)="login2()">
-      登录
     </button>
-  </form>
+    <!--</button> <button id="login-button1" ion-button color="positive" block style="color:#1D2423;" (click)="login2()">-->
+      <!--登录-->
+    <!--</button>-->
 </ion-content>

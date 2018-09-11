@@ -21,8 +21,8 @@ export class HttpSerProvider {
  toast:any
   upmsUrl = 'http://192.168.1.80:8082';
   apiUrl = 'http://61.129.126.251:8091/api/admin/user/login';
-  url='http://61.129.126.251:8091/api/';
-  urlApi='http://61.129.126.251:8091/api/';
+  url='http://192.168.90.83:8091/api/';
+  urlApi='http://192.168.90.83:8091/api/';
 
   public postLogin(url: string, body: any , successCallback, errorCallback): any {
     // 此处使用的post模式为非严格模式，如果要使用严格模式，请把参数放在第二个位置 覆盖null

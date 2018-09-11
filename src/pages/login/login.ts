@@ -14,11 +14,15 @@ import {ScheduilingPlanPage} from "../scheduiling-plan/scheduiling-plan";
 export class LoginPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
+  username:any;
+  password:any
   constructor(public navCtrl: NavController,private bluetoothSerial: BluetoothSerial,public req:HttpSerProvider) {
     // req.getHotMovies()
     // this.bluetoothSerial.list()
     let that=this;
-
+    if(this.req.getToken()){
+      this.navCtrl.setRoot(ScheduilingPlanPage)
+    }
     // this.bluetoothSerial.discoverUnpaired().then(data=>{
     //   alert(JSON.stringify(data)+"data")
     //   that.bluetoothSerial.connect(data[0].relatedAddress).subscribe(function (dele) {
@@ -29,77 +33,43 @@ export class LoginPage {
 
 
   }
-  login2(){
-    this.req.getnotloading('queryDelivery',{}).subscribe(function (ok) {
 
-    },function (err) {
-
-    })
-  }
-  login(){
-    var that=this;
-   this.navCtrl.push(ScheduilingPlanPage);
-    this.req.postLogin('login',{userCode:'A0001',password:'123456'},function (ok) {
-      // alert("ok")
-      let data=ok.data
-      if(data.token){
-        console.log(data.token)
+  login() {
+    var that = this;
+    // alert(this.username);
+    if (this.username && this.password) {
+      this.req.postLogin('login', {userCode: this.username, password: this.password}, function (res,msg) {
         // alert("ok")
-        that.req.setToken({token:data.token});
-        // that.navCtrl.push(HomeIndexPage)
+        let data = res.data
+        if(res.code=='500'){
 
-      }else {
-        that.req.showerr("登录失败")
+          // alert(1)
+          that.req.showerr("登录失败")
 
-        that.req.clearToken()
-      }
-    },function (err) {
-      // alert(err)
-      console.log("err",err)
-      that.req.showerr(err.error.message)
-      // that.req.closeLoadView();
-    })
+          that.req.clearToken()
+        }
+         else {
+          // alert(data)
+          console.log(data.token)
+          // alert("ok")
+          that.req.setToken({token: data.token});
+          that.navCtrl.push(ScheduilingPlanPage);
 
-    // this.bluetoothSerial.write('hello world').then(function (ok) {
-    //    alert(1)
-    // }, function (err) {
-    //   alert(2)
-    // });
-   //  alert(1)
-   // // this.getData.getHotMovies();
-   //  this.getData.post('a',{username:'hukai',password:'123456'},function (a,b) {
-   //    alert(a,b)
-   //
-   //  },function (er) {
-   //
-   //  })
-   //  this.http.request('http://jsonplaceholder.typicode.com/photos')
-   //    .subscribe((res: Response) => {
-   //      // this.listData = res.json();
-   //      console.log(res,"res")
-   //    });
-   // let apiUrl = 'http://192.168.2.109:8080/user/login';
-   let apiUrl = 'http://localhost:3000';
-   let json={username:'hukai',password:'12345a6'};
+          // that.navCtrl.push(HomeIndexPage)
 
-    // this.data.request('POST',apiUrl,{headers: {
-    //   'Content-Type': 'application/json',
-    //   'Accept': '*/*'
-    // },body:json}).subscribe((res: any) => {
-    //   // If the API returned a successful response, mark the user as logged in
-    //    console.log(res)
-    // }, err => {
-    //   console.error('ERROR', err);
-    // });;
-    // this.data.post(apiUrl,json,{headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': '*/*'
-    //   }}).subscribe(res=>{
-    //   console.log(res)
-    // })
-    // this.http.post(apiUrl,{username:'hukai',password:'123456'}).subscribe(res=>{
-    //   console.log(res)
-    // })
+        }
+      }, function (err) {
+        // alert(err)
+        console.log("err", err)
+        that.req.showerr(err.error.message)
+        // that.req.closeLoadView();
+      })
+
+    } else {
+      alert("账号密码不能为空")
+    }
   }
+
+
 
 }

@@ -7,38 +7,221 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>填写充装磅单</ion-title>
+    <ion-title *ngIf="tileselct">填写充装磅单</ion-title>
+    <ion-title  *ngIf="!tileselct">录入榜单</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+
+   <div *ngIf="status==2">
      <ion-list>
        <!--<ion-item >-->
-         <!--<ion-label>-->
-           <!--起始里程数-->
-         <!--</ion-label>-->
-         <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
+       <!--<ion-label>-->
+       <!--起始里程数-->
+       <!--</ion-label>-->
+       <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
        <!--</ion-item>-->
        <ion-item id="login-input1">
          <ion-label>
            磅前
          </ion-label>
-         <ion-input type="email" placeholder="磅前" *ngIf="status==3" [(ngModel)]="before" ></ion-input>T
+         <ion-input type="email" placeholder="磅前"  [(ngModel)]="before" ></ion-input>T
        </ion-item>
        <ion-item >
          <ion-label>
            磅后
          </ion-label>
-         <ion-input type="email" placeholder="磅后" *ngIf="status==3" [(ngModel)]="after" ></ion-input>T
-       </ion-item>
-       <ion-item >
-          充装总数：{{after-before}}
+         <ion-input type="email" placeholder="磅后"  [(ngModel)]="after" ></ion-input>T
        </ion-item>
        <ion-item>
-         <Button full (click)="toPhto()"> 上传照片</Button>
+         充装总数：{{after-before||''}}
+       </ion-item>
+
+       <ion-item>
+         <button ion-button type="submit"  (click)="toPhto()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">上传照片</button>
+
        </ion-item>
      </ion-list>
 
+   </div>
+   <div *ngIf="status=='over'">
+     <ion-list>
+       <!--<ion-item >-->
+       <!--<ion-label>-->
+       <!--起始里程数-->
+       <!--</ion-label>-->
+       <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
+       <!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
+       <!--<ion-item id="logint1">-->
+         <!--<ion-label>-->
+           <!--结束里程-->
+         <!--</ion-label>-->
+         <!--<ion-input type="email" placeholder="磅前"  [(ngModel)]="before" ></ion-input>T-->
+       <!--</ion-item>-->
+       <!--<ion-item >-->
+         <!--<ion-label>-->
+           <!--磅后-->
+         <!--</ion-label>-->
+         <!--<ion-input type="email" placeholder="磅后"  [(ngModel)]="after" ></ion-input>T-->
+       <!--</ion-item>-->
+       <!--<ion-item>-->
+         <!--充装总数：{{after-before||''}}-->
+       <!--</ion-item>-->
+
+       <ion-item>
+         <button ion-button type="submit"  (click)="overphoto1()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">上传送货单照片</button>
+
+       </ion-item>
+       <ion-item id="logint1">
+       <ion-label>
+       结束里程
+       </ion-label>
+       <ion-input type="email" placeholder="磅前"  [(ngModel)]="enmile" ></ion-input>T
+       </ion-item>
+       <!--<ion-item >-->
+       <ion-item>
+         <button ion-button type="submit"  (click)="overphoto2()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">上传里程图片</button>
+
+       </ion-item>
+
+     </ion-list>
+
+   </div>
+ <div *ngIf="status==3">
+     <ion-list>
+       <!--<ion-item >-->
+       <!--<ion-label>-->
+       <!--起始里程数-->
+       <!--</ion-label>-->
+       <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
+       <!--</ion-item>-->
+       <ion-item >
+         <ion-label>
+           起始里程数
+         </ion-label>
+         <ion-input type="email" placeholder="起始里程数"  [(ngModel)]="mile" ></ion-input>T
+       </ion-item>
+
+       <ion-item>
+         <button ion-button type="submit"   (click)="outCompany()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">上传照片</button>
+
+       </ion-item>
+     </ion-list>
+
+   </div>
+
+  <div *ngIf="bang=='01'">
+    <ion-list>
+      <!--<ion-item >-->
+      <!--<ion-label>-->
+      <!--起始里程数-->
+      <!--</ion-label>-->
+      <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
+      <!--</ion-item>-->
+      <ion-item id="login-inp22ut1">
+        <ion-label>
+          磅前
+        </ion-label>
+        <ion-input type="email" placeholder="磅前"  [(ngModel)]="before" ></ion-input>T
+      </ion-item>
+      <ion-item >
+        <ion-label>
+          磅后
+        </ion-label>
+        <ion-input type="email" placeholder="磅后"  [(ngModel)]="after" ></ion-input>T
+      </ion-item>
+      <ion-item>
+        充装总数：{{before-after||''}}
+      </ion-item>
+
+      <ion-item>
+        <button ion-button type="submit"  (click)="save()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">保存</button>
+
+      </ion-item>
+    </ion-list>
+
+  </div>
+  <div *ngIf="bang=='02'">
+    <ion-list>
+      <!--<ion-item >-->
+      <!--<ion-label>-->
+      <!--起始里程数-->
+      <!--</ion-label>-->
+      <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
+      <!--</ion-item>-->
+      <ion-item >
+        <ion-label>
+          流量计
+        </ion-label>
+        <ion-input type="email" placeholder="磅前"  [(ngModel)]="top" ></ion-input>
+        <ion-label>
+          m³
+        </ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-label>
+          签收量
+        </ion-label>
+        <ion-input type="email" placeholder="磅后"  [(ngModel)]="center" ></ion-input>T
+      </ion-item>
+
+
+      <ion-item>
+        <button ion-button type="submit"  (click)="save2()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">保存</button>
+
+      </ion-item>
+    </ion-list>
+
+  </div>
+  <div *ngIf="bang=='03'">
+    <ion-list>
+      <!--<ion-item >-->
+      <!--<ion-label>-->
+      <!--起始里程数-->
+      <!--</ion-label>-->
+      <!--<ion-input type="email" placeholder="磅后" *ngIf="status==4" [(ngModel)]="after" ></ion-input>T-->
+      <!--</ion-item>-->
+      <ion-item >
+        <ion-label>
+          充装前液位 ( mmHL)
+        </ion-label>
+        <ion-input type="text" placeholder="充装前液位"  [(ngModel)]="top1" ></ion-input>
+        <ion-label>
+        <span>
+
+        </span>
+        </ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-label>
+          充装后液位( mmHL)
+        </ion-label>
+        <ion-input type="email" placeholder="充装后液位"  [(ngModel)]="top2" ></ion-input><span>
+
+      </span>
+      </ion-item>
+      <ion-item >
+        <ion-label>
+          签收量
+        </ion-label>
+        <ion-input type="email" placeholder="充装后液位"  [(ngModel)]="top1-top2" ></ion-input><span>
+
+        <ion-label>
+
+        </ion-label>
+      </span>
+      </ion-item>
+
+
+      <ion-item>
+        <button ion-button type="submit"  (click)="save3()" style="position:relative ;width:120px;height:40px;left:38%;top: 90%;border-radius: 20px;">保存</button>
+
+      </ion-item>
+    </ion-list>
+
+  </div>
 </ion-content>
