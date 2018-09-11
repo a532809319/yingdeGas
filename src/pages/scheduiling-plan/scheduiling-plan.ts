@@ -10,9 +10,10 @@ import {PersondetailPage} from "../persondetail/persondetail";
 import {PoundlistPage} from "../poundlist/poundlist";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FillWeightPage} from "../fill-weight/fill-weight";
-
 @Component({
-  templateUrl: 'scheduiling-plan.html'
+  templateUrl: 'scheduiling-plan.html',
+  selector: 'scheduiling-plan',
+
 })
 export class ScheduilingPlanPage {
   task = 'new'

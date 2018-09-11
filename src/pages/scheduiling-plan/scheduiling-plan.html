@@ -11,23 +11,11 @@
   <!--</button>-->
   <div>
     <ion-navbar no-border-bottom>
-      <ion-title></ion-title>
+      <ion-title>首页</ion-title>
     </ion-navbar>
-    <button ion-button click="per()" color="dark" clear icon-only style="position:absolute;right:1%;top:5%">
+    <button ion-button click="per()" color="topic-green" clear icon-only style="position:absolute;right:1%;top:5%">
       <ion-icon name='contact' is-active="true"></ion-icon>
     </button>
-    <ion-toolbar no-border-top>
-
-      <ion-segment [(ngModel)]="task" (ionChange)="sysChanged()">
-        <ion-segment-button value="new">
-          新任务
-        </ion-segment-button>
-        <ion-segment-button value="todo">
-          待完成
-        </ion-segment-button>
-
-      </ion-segment>
-    </ion-toolbar>
   </div>
   <div>
 
@@ -39,6 +27,16 @@
 
 <ion-content padding>
 
+  <ion-segment color="topic-green" [(ngModel)]="task" (ionChange)="sysChanged()">
+    <ion-segment-button value="new">
+      新任务
+    </ion-segment-button>
+    <ion-segment-button value="todo">
+      待完成
+    </ion-segment-button>
+
+  </ion-segment>
+
 
   <div [ngSwitch]="task">
 
@@ -49,73 +47,52 @@
         <div *ngFor="let item of content">
           <div padding *ngIf="(item.vdef17==null)">
 
-            <div>
-              <ion-checkbox id="1" formControlName={{item.cdeliveryid}} checked="false"
-                            style="float: right"></ion-checkbox>
+            <div style="position: relative;width:40px;height:40px">
+              <ion-checkbox  id="1" formControlName={{item.cdeliveryid}} checked="false"
+                            style="float: left;left: 2% ;top: 20px "></ion-checkbox>
+            </div>
+            <div >
+              <span class="subtitle"> 提货工厂:</span> <span class="itemtile">{{item.factoryname}}</span>
+            </div>
+            <div><span class="subtitle">发车时间:&nbsp;&nbsp;</span><span class="itemtile">{{item.vdef18}}</span>
+            </div>
+            <div><span class="subtitle">主驾驶室:&nbsp;</span> <span
+              class="itemtile">{{item.masterdriver}} </span>&nbsp;&nbsp;&nbsp;<span class="subtitle">副驾驶室:&nbsp;</span>
+              <span class="itemtile">{{item.copilot}}</span></div>
+            <div><span class="subtitle">调度号:&nbsp;&nbsp;</span> <span  class="itemtile">{{item.vbillcode}}</span> &nbsp;
+
             </div>
             <div>
-              提货工厂：{{item.factoryname}}
+              <span
+                class="subtitle">车号:</span>
+              <span class="itemtile"> {{item.vvehiclename}}  </span>
             </div>
-            <div>发车时间{{item.vdef18}}</div>
-            <div>主驾驶室{{item.masterdriver}} &nbsp;&nbsp;&nbsp; 副驾驶室{{item.copilot}}</div>
-            <div>调度号{{item.vbillcode}} &nbsp;&nbsp;&nbsp; 车号{{item.vvehiclename}}</div>
-            <table border="1">
-              <tr>
-                <th>客户</th>
-                <th>货量</th>
-                <th>地址</th>
-                <th> 预计送货时间</th>
-              </tr>
-              <tr *ngFor="let detail of item.deliveryDetailDtos" style="text-align: center">
-                <td style="padding: 3px">{{detail.customername}}</td>
-                <td style="padding: 3px">{{detail.nastnum}}</td>
-                <td>{{detail.detailinfo||''}}</td>
+            <div style="overflow:auto;width:100%">
+              <table width="auto" style="white-space:nowrap">
+                  <tr class="table-head-1">
+                    <th width="3%">客户</th>
+                    <th width="20%">货量</th>
+                    <th width="40%">地址</th>
+                    <th width="30%"> 预计送货时间</th>
 
-                <td style="padding: 3px">{{detail.vbdef16||''}}</td>
+                  </tr>
+                  <tr class="table-head-2"  *ngFor="let detail of item.deliveryDetailDtos" style="text-align: center">
+                    <td style="padding: 3px">{{detail.customername}}</td>
+                    <td style="padding: 3px">{{detail.nastnum}}</td>
+                    <td>{{detail.detailinfo||''}}</td>
 
-              </tr>
-            </table>
+                    <td style="padding: 3px">{{detail.vbdef16||''}}</td>
+
+                  </tr>
+
+              </table>
+            </div>
 
           </div>
         </div>
         <button ion-button type="submit" style="position:fixed;left:38%;top: 90%;border-radius: 30px;">接受任务</button>
 
       </form>
-      <!--<button  (click)="detail()">-->
-      <!--发货工厂：{{ item.factoryname}}-->
-      <!--</button>-->
-      <!--&lt;!&ndash;<ion-label>Tyrion Lannister</ion-label>&ndash;&gt;-->
-
-      <!--&lt;!&ndash;<p>发车时间：  <input id={{item.vbillcode}} type="checkbox" (click)="checkboxOnclick(item.vbillcode)"   style=float:right />&ndash;&gt;-->
-      <!--&lt;!&ndash;<p>发车时间：  <input id={{item.vbillcode}} type="checkbox" (click)="checkboxOnclick(item.vbillcode)"   style=float:right />&ndash;&gt;-->
-
-
-      <!--&lt;!&ndash;</p>&ndash;&gt;-->
-      <!--<p>主驾驶：{{item.masterdriver}} 副驾驶：-->
-      <!--</p>-->
-      <!--&lt;!&ndash;<ion-checkbox color="dark" checked="true"></ion-checkbox>&ndash;&gt;-->
-
-      <!--<div>-->
-
-      <!--</div>-->
-
-
-      <!--<p>调度号：{{item.vbillcode}} 车号：{{item.carhanger}}</p>-->
-      <!--<table border="1">-->
-      <!--<tr>-->
-      <!--<th>客户</th>-->
-      <!--<th>货量</th>-->
-      <!--<th>地址</th>-->
-      <!--<th> 预计送货时间</th>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td>{{item.custemername}}</td>-->
-      <!--<td>{{item.nastnum}}</td>-->
-      <!--<td></td>-->
-      <!--<td>{{item.vdef16}}</td>-->
-      <!--</tr>-->
-      <!--</table>-->
-      <!--</div>-->
 
     </ion-list>
   </div>
@@ -124,93 +101,113 @@
     <ion-list *ngSwitchCase="'todo'">
       <div radio-group (ngModelChange)='Changed($event)' [(ngModel)]="autoManufacturers">
 
-        <div *ngFor="let item of content" padding>
-          <div padding *ngIf="item.vdef17!=null">
+        <div *ngFor="let item of content" >
+          <div  *ngIf="item.vdef17!=null">
 
             <ion-icon (click)="complite(item.cdeliveryid,item)" name="ios-arrow-dropright-outline"
                       style="float: right;font-size: 30px" large></ion-icon>
-            <div>
-              <span class="title">提货工厂</span>：{{item.factoryname}}
+
+
+            <!--<div>-->
+              <!--<span class="title">提货工厂</span>：{{item.factoryname}}-->
+            <!--</div>-->
+            <!--<div>发车时间{{item.vdef18}}</div>-->
+            <!--<div>主驾驶室{{item.masterdriver}} &nbsp;&nbsp;&nbsp; 副驾驶室{{item.copilot}}</div>-->
+            <!--<div>调度号{{item.vbillcode}} &nbsp;&nbsp;&nbsp; 车号{{item.vvehiclename}}</div>-->
+            <div >
+              <span class="subtitle"> 提货工厂:</span> <span class="itemtile">{{item.factoryname}}</span>
             </div>
-            <div>发车时间{{item.vdef18}}</div>
-            <div>主驾驶室{{item.masterdriver}} &nbsp;&nbsp;&nbsp; 副驾驶室{{item.copilot}}</div>
-            <div>调度号{{item.vbillcode}} &nbsp;&nbsp;&nbsp; 车号{{item.vvehiclename}}</div>
+            <div><span class="subtitle">发车时间:&nbsp;&nbsp;</span><span class="itemtile">{{item.vdef18}}</span>
+            </div>
+            <div><span class="subtitle">主驾驶室:&nbsp;</span> <span
+              class="itemtile">{{item.masterdriver}} </span>&nbsp;&nbsp;&nbsp;<span class="subtitle">副驾驶室:&nbsp;</span>
+              <span class="itemtile">{{item.copilot}}</span></div>
+            <div><span class="subtitle">调度号:&nbsp;&nbsp;</span> <span  class="itemtile">{{item.vbillcode}}</span> &nbsp;
+
+            </div>
+            <div>
+              <span
+                class="subtitle">车号:</span>
+              <span class="itemtile"> {{item.vvehiclename}}  </span>
+            </div>
             <ion-row>
               <!--{{item.vdef17}}-->
-              <ion-col><span [ngStyle]="{'color':item.vdef17  == '0' ? 'green' : 'black' }"
-                             (click)="goto(item.vdef17,item)">到厂</span>
+              <ion-col><span
+                             (click)="goto(item.vdef17,item)"><button  class="fbtn" ion-button round [ngStyle]="{'background':item.vdef17  == '0' ? 'green' : '#ccc' }">到厂</button></span>
               </ion-col>
-              <ion-col><span [ngStyle]="{'color':item.vdef17  == '1'? 'green' : 'black' }"
-                             (click)="todoStart(item.vdef17,item)">开始充装</span></ion-col>
-              <ion-col><span [ngStyle]="{'color':item.vdef17 == '2' ? 'green' : 'black' }"
-                             (click)="todoenstart(item.vdef17,item)">结束充装</span></ion-col>
+              <ion-col><span
+                             (click)="todoStart(item.vdef17,item)"><button class="fbtn" ion-button round  [ngStyle]="{'background':item.vdef17  == '1'? 'green' : '#ccc' }">开始充装</button></span></ion-col>
+              <ion-col><span
+                             (click)="todoenstart(item.vdef17,item)"><button class="fbtn" ion-button round [ngStyle]="{'background':item.vdef17 == '2' ? 'green' : '#ccc' }">结束充装</button> </span></ion-col>
               <ion-col><span (click)="outCompany(item.vdef17,item)"
-                             [ngStyle]="{'color':item.vdef17  =='3'? 'green' : 'black' }">出厂</span></ion-col>
+                            ><button ion-button round  class="fbtn" [ngStyle]="{'background':item.vdef17  =='3'? 'green' : '#ccc' }">出厂</button></span></ion-col>
             </ion-row>
-            <table border="1" style="position: relative">
-              <tr>
-                <th *ngIf="item.vdef17  == '4'?true:false"> 选择</th>
+            <div style="overflow-x:scroll;overflow-y:auto;width:100%;margin-top: 10px ; position: relative;">
+              <table width="auto" style="white-space:nowrap; position: relative" >
+                <tr class="table-head-1" style="background: #009FE8;width: 100%;color: white" >
+                  <th width="5%" *ngIf="item.vdef17  == '4'?true:false"> 选择</th>
 
-                <th>客户</th>
-                <th>货量</th>
-                <th>地址</th>
-                <th> 预计送货时间</th>
-              </tr>
+                  <th   width="25%" >客户</th>
+                  <th  width="35%">货量</th>
+                  <th  width="35%">地址</th>
+                </tr>
 
-              <tr *ngFor="let detail of item.deliveryDetailDtos">
-                <td width="30px" *ngIf="item.vdef17  == '4'?true:false">
-                  <!--<ion-row>-->
-                  <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '1' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">进厂</span></ion-col>-->
-                  <!--<ion-col><span [ngStyle]="{'color':item.vbdef15  === '2'? 'green' : 'black' }"  (click)="todoTask(item.vdef17,item)" >开始充装</span></ion-col>-->
-                  <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '3' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">结束充装</span></ion-col>-->
-                  <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '4'? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">出厂</span></ion-col>-->
-                  <!--</ion-row>-->
-                  <div style="background: #ccc;border: 1px;margin: 5px;width: 20px;height: 20px">
-                    <ion-radio style="width: 100%;height: 100%" value={{detail.cdeliverybid}}
-                    ></ion-radio>
+                <tr style="text-align: center" *ngFor="let detail of item.deliveryDetailDtos">
+                  <td width="30px" *ngIf="item.vdef17  == '4'?true:false">
+                    <!--<ion-row>-->
+                    <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '1' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">进厂</span></ion-col>-->
+                    <!--<ion-col><span [ngStyle]="{'color':item.vbdef15  === '2'? 'green' : 'black' }"  (click)="todoTask(item.vdef17,item)" >开始充装</span></ion-col>-->
+                    <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '3' ? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">结束充装</span></ion-col>-->
+                    <!--<ion-col> <span [ngStyle]="{'color':item.vbdef15  === '4'? 'green' : 'black' }" (click)="todoTask(item.vdef17,item)">出厂</span></ion-col>-->
+                    <!--</ion-row>-->
+                    <div style="background: #ccc;border: 1px;margin: 5px;width: 20px;height: 20px">
+                      <ion-radio style="width: 100%;height: 100%" value={{detail.cdeliverybid}}
+                      ></ion-radio>
+                    </div>
+
+
+                  </td>
+
+                  <td >{{detail.customername}}</td>
+                  <td >{{detail.nastnum}}</td>
+                  <td>{{detail.detailinfo||''}}</td>
+
+                  <!--<td >{{detail.vbdef16||''}}</td>-->
+                  <div *ngIf="item.vdef17=='4'&&detail.cdeliverybid==bid"
+                       style="position: absolute;bottom: -40px;left:0px;height: 40px;">
+                    <!--{{detail.customername}}-->
+                    <button class="fbtn" ion-button round (click)="cometocus(item.cdeliveryid,item,detail)" *ngIf="detail.cdeliverybid==bid"
+                          [ngStyle]="{'background':detail.vbdef15  == '~'&&item.vdef17=='4' ? 'green' : '#ccc' }"
+
+                    >到达客户</button>
+                    <button class="fbtn" ion-button round *ngIf="detail.cdeliverybid==bid" (click)="comestart(item.cdeliveryid,item,detail)"
+                          [ngStyle]="{'background':detail.vbdef15  == '0'&&item.vdef17=='4'? 'green' : '#ccc' }"
+
+                    >开始卸货</button>
+                    <button class="fbtn" ion-button round
+                      (click)="comeent(item.cdeliveryid,item,detail)"
+                      [ngStyle]="{'background':detail.vbdef15 == '1' &&item.vdef17=='4'? 'green' : '#ccc' }">
+                          结速卸货</button>
+
+                    <button class="fbtn"  ion-button  round  *ngIf="detail.cdeliverybid==bid"
+                          (click)="overgame(detail.cdeliveryid,item,detail)"
+                          [ngStyle]="{'background':detail.vbdef15  =='2'&&item.vdef17=='4'? 'green' : '#ccc' }">
+                          签收
+                        </button>
+
                   </div>
 
 
-                </td>
-
-                <td style="padding: 3px">{{detail.customername}}</td>
-                <td style="padding: 3px">{{detail.nastnum}}</td>
-                <td>{{detail.detailinfo||''}}</td>
-
-                <td style="padding: 3px">{{detail.vbdef16||''}}</td>
-                <div *ngIf="item.vdef17=='4'&&detail.cdeliverybid==bid"
-                     style="position: absolute;bottom: -60px;left:0px;height: 40px;width: 300px">
-                      <!--{{detail.customername}}-->
-
-                        <span (click)="cometocus(item.cdeliveryid,item,detail)" *ngIf="detail.cdeliverybid==bid"
-                              [ngStyle]="{'color':detail.vbdef15  == '~'&&item.vdef17=='4' ? 'green' : 'black' }"
-
-                        >到达客户</span>
-                        <span *ngIf="detail.cdeliverybid==bid"  (click)="comestart(item.cdeliveryid,item,detail)"
-                              [ngStyle]="{'color':detail.vbdef15  == '0'&&item.vdef17=='4'? 'green' : 'black' }"
-
-                        >开始卸货</span>
-                        <span
-                              (click)="comeent(item.cdeliveryid,item,detail)"
-                              [ngStyle]="{'color':detail.vbdef15 == '1' &&item.vdef17=='4'? 'green' : 'black' }">
-                          结速卸货</span>
-
-                        <span *ngIf="detail.cdeliverybid==bid"
-                              (click)="overgame(detail.cdeliveryid,item,detail)" [ngStyle]="{'color':detail.vbdef15  =='2'&&item.vdef17=='4'? 'green' : 'black' }">
-                          签收
-                        </span>
-
-                </div>
+                </tr>
 
 
-              </tr>
+              </table>
 
-
-            </table>
-
+            </div>
+            <div style="height: 20px;width: 100%"></div>
 
           </div>
-          <div style="height: 40px;width: 100%"></div>
+          <div style="height: 20px;width: 100%"></div>
         </div>
         <!--<button ion-button type="submit"  style="position:fixed;left:38%;top: 90%;" >接受任务</button>-->
 

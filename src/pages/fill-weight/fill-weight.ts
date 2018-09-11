@@ -125,7 +125,7 @@ export class FillWeightPage {
 
 
 
-     this.imgUpload.presentActionSheet({requestType: 8,bid: this.hid,hid:this.bid},function (data) {
+     this.imgUpload.presentActionSheet({requestType: '',bid: this.hid,hid:this.bid},function (data) {
        // that.uriarr=data;
        // that.uri=data;
        // that.navCtrl.pop();

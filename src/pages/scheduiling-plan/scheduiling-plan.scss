@@ -1,15 +1,40 @@
-page-scheduiling-plan {
-  //.item-cover{height: 0!important;}
-/*icon-icon{
-  position:absolute;
-  top: 1px;
-  right: 1px;
-}*/
-  .fuckme{
-    color: green;
-    background: red;
+scheduiling-plan {
+
+  .subtitle {
+    font-family: PingFangSC-Medium;
+    font-size: 18px;
+    color: #5A6266;
+    line-height: 40px;
+    letter-spacing: 0;
   }
-  .title{
-    background: red;
+  .itemtile {
+    line-height: 40px;
+    font-size: 16px;
+
+  }
+  .table-head-1 {
+
+    font-family: PingFangSC-Medium;
+    font-size: 16px;
+    color: #cccccc;
+    letter-spacing: 0;
+    background: #009FE8;
+    line-height: 40px;
+
+  }
+  .table-head-2 {
+
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: black;
+    letter-spacing: 0;
+
+  }
+  .fbtn{
+    padding: 6px;
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 14px;
   }
 }
